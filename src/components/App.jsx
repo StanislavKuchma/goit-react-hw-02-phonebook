@@ -1,9 +1,10 @@
-import { render } from "@testing-library/react";
+// import { render } from "@testing-library/react";
 import React from "react";
 import Form from "./Form";
 import { ContactList } from "./ContactList";
 import { Filter } from "./Filter";
 import { nanoid } from 'nanoid';
+
 
 export class App extends React.Component {
   state = {
@@ -15,12 +16,20 @@ export class App extends React.Component {
   }
 
   formSubmitHandler = data => {
-    console.log(data)
+
+    const filterContact = data.name.toLocaleLowerCase();
+    const includeContact = this.state.contacts.filter(contact =>
+      contact.name.toLocaleLowerCase().includes(filterContact));
+    // console.log(includeContact)
+    // console.log(filterContact)
+    if (includeContact.length !== 0){
+      window.alert(`${data.name} is already in contacts`);
+      return
+    }
     const contact = {
       id: nanoid(),
       name: data.name,
       number: data.number
-   
     }
 
     this.setState(prevState =>({
@@ -37,7 +46,7 @@ export class App extends React.Component {
   };
 
   render() {
-    const { contacts } = this.state.contacts;
+    // const { contacts } = this.state.contacts;
     const normalFilter = this.state.filter.toLocaleLowerCase();
     const filterContacts = this.state.contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(normalFilter));
@@ -48,7 +57,7 @@ export class App extends React.Component {
           justifyItems: 'center',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: 20,
+          fontSize: 25,
           color: '#010101'
         }}
       >

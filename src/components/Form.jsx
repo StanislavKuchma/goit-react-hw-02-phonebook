@@ -12,14 +12,7 @@ export class Form extends Component {
     
   handleSubmit = e => {
     e.preventDefault();
-    const filterContacts = contacts.name.toLocaleLowerCase();
-    // const includeContact = this.state.contacts.filter(contact =>
-    //   contact.name.toLocaleLowerCase().includes(normalFilter));
-    console.log(filterContacts)
-    if (filterContacts.includes(e.currentTarget.name.value.toLocaleLowerCase())) {
-      console.log(e.currentTarget.name.value.toLocaleLowerCase())
-      return
-    }
+
       this.props.onSubmit(this.state);
       this.reset();
     }
@@ -32,7 +25,7 @@ export class Form extends Component {
           <form onSubmit={this.handleSubmit}>
           <label htmlFor="">
           Name<br />
-          <input value={this.state.name} onChange = {this.handleChange}
+              <input style={{ width: 300, height: 40}} value={this.state.name} onChange = {this.handleChange}
                 type="text"
                 name="name"
                 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -43,7 +36,7 @@ export class Form extends Component {
           <br/>
           <label htmlFor="">
           Number<br/>
-          <input value={this.state.number} onChange = {this.handleChange}
+          <input style={{ width: 300, height: 40}} value={this.state.number} onChange = {this.handleChange}
                 type="tel"
                 name="number"
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -51,7 +44,7 @@ export class Form extends Component {
                 required
               />
             <br/>
-            <button type="submit" style={{ width: 150, height: 60, }} className="">Add contact</button>
+            <button type="submit" style={{ width: 150, height: 60, marginTop: 50}} className="">Add contact</button>
             </label>
         </form>
         </>
