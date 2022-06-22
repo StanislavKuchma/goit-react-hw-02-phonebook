@@ -18,11 +18,12 @@ export class App extends React.Component {
   formSubmitHandler = data => {
 
     const filterContact = data.name.toLocaleLowerCase();
-    const includeContact = this.state.contacts.filter(contact =>
-      contact.name.toLocaleLowerCase().includes(filterContact));
-    // console.log(includeContact)
-    // console.log(filterContact)
-    if (includeContact.length !== 0){
+   
+    const contactsForFind = this.state.contacts.map((i => i.name.toLocaleLowerCase()))
+
+    const includeContact = contactsForFind.includes(filterContact);
+
+    if (includeContact){
       window.alert(`${data.name} is already in contacts`);
       return
     }
@@ -46,7 +47,6 @@ export class App extends React.Component {
   };
 
   render() {
-    // const { contacts } = this.state.contacts;
     const normalFilter = this.state.filter.toLocaleLowerCase();
     const filterContacts = this.state.contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(normalFilter));
